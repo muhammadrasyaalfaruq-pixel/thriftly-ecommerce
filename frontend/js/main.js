@@ -145,3 +145,22 @@ function openAuth(mode) {
     }
   };
 }
+
+// 11. Kartu produk yang sama untuk SEMUA halaman. Pakai: productCard(p)
+// p = { id, name, brand, size, condition_label, price, image, wishlist_count, is_negotiable }
+const KONDISI = { like_new: 'Sangat baik', good: 'Baik', fair: 'Cukup' };
+
+function productCard(p) {
+  const foto = p.image || 'https://placehold.co/600x800?text=Thriftly';
+  return `
+    <a class="pcard" href="${ROOT}pages/product-detail.html?id=${p.id}">
+      <div class="thumb">
+        <img src="${esc(foto)}" alt="${esc(p.name)}" loading="lazy">
+        ${p.is_negotiable ? '<span class="nego">Bisa nego</span>' : ''}
+        <span class="heart">&#9825; ${p.wishlist_count || 0}</span>
+      </div>
+      <div class="brand">${esc(p.brand || 'Vintage')}</div>
+      <div class="detail">${esc(p.size || '-')} &middot; ${KONDISI[p.condition_label] || ''}</div>
+      <div class="price">${rupiah(p.price)}</div>
+    </a>`;
+}
