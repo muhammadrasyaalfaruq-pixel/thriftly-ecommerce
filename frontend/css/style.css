@@ -44,3 +44,18 @@ h1, h2, h3 { font-family: var(--display); letter-spacing: -0.02em; }
   .search { order: 3; max-width: none; flex-basis: 100%; }
   .nav-cats { overflow-x: auto; }
 }
+
+/* Modal login dan daftar */
+.overlay { position: fixed; inset: 0; background: rgba(0,0,0,.6); display: flex; align-items: center; justify-content: center; z-index: 50; padding: 16px; }
+.modal { position: relative; background: #fff; border-radius: 10px; width: 100%; max-width: 360px; padding: 28px 26px; }
+.modal h2 { font-size: 18px; line-height: 1.25; text-align: center; margin: 0 0 8px; }
+.modal .sub { text-align: center; font-size: 12px; color: var(--muted); margin-bottom: 18px; }
+.modal .sub a { color: #1d4ed8; text-decoration: underline; cursor: pointer; }
+.modal .close { position: absolute; right: 12px; top: 8px; background: none; border: 0; font-size: 22px; line-height: 1; color: var(--muted); cursor: pointer; }
+.field { width: 100%; border: 0; border-bottom: 1px solid var(--line); padding: 10px 0; margin-bottom: 10px; background: none; outline: none; }
+.field:focus { border-bottom-color: var(--ink); }
+.btn-block { display: block; width: 100%; padding: 12px; border-radius: 6px; text-align: center; }
+.form-error { color: var(--red); font-size: 12px; min-height: 16px; margin-bottom: 8px; }
+
+/* Notifikasi kecil */
+.toast { position: fixed; left: 50%; bottom: 24px; transform: translateX(-50%); background: var(--ink); color: #fff; padding: 10px 18px; border-radius: 999px; font-size: 13px; z-index: 60; }
