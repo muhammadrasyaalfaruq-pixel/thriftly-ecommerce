@@ -1,0 +1,61 @@
+/* THRIFTLY - CSS GLOBAL */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Syne:wght@700;800&display=swap');
+
+:root {
+  --ink: #111;
+  --muted: #8a8a85;
+  --line: #ececea;
+  --soft: #f4f4f1;
+  --red: #e11d2e;
+  --display: 'Syne', 'Inter', sans-serif;
+}
+* { box-sizing: border-box; }
+body { margin: 0; font-family: 'Inter', system-ui, sans-serif; font-size: 14px; color: var(--ink); background: #fff; }
+a { color: inherit; text-decoration: none; }
+img { max-width: 100%; display: block; }
+button, input { font: inherit; }
+h1, h2, h3 { font-family: var(--display); letter-spacing: -0.02em; }
+.container { max-width: 1100px; margin: 0 auto; padding: 0 16px; }
+.muted { color: var(--muted); font-size: 12px; }
+:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+
+/* Tombol */
+.btn { display: inline-block; padding: 9px 18px; border-radius: 999px; border: 1px solid var(--ink); background: var(--ink); color: #fff; font-weight: 600; font-size: 13px; cursor: pointer; }
+.btn:hover { opacity: .88; }
+.link { background: none; border: 0; padding: 0; font-weight: 600; font-size: 13px; color: var(--ink); cursor: pointer; }
+
+/* Navbar */
+#navbar { border-bottom: 1px solid var(--line); }
+.nav-top { display: flex; align-items: center; gap: 24px; padding: 14px 0; }
+.logo { display: flex; align-items: center; gap: 6px; font-family: var(--display); font-weight: 800; font-size: 20px; }
+.logo i { color: var(--red); font-style: normal; }
+.search { flex: 1; max-width: 460px; margin: 0 auto; }
+.search input { width: 100%; padding: 9px 14px; border: 0; border-radius: 8px; background: var(--soft); }
+.nav-actions { display: flex; align-items: center; gap: 16px; margin-left: auto; }
+.nav-cats { display: flex; gap: 22px; padding: 10px 0; border-top: 1px solid var(--line); font-size: 12px; color: #55554f; }
+.nav-cats .sale { color: var(--red); font-weight: 600; }
+
+/* Footer */
+#footer { margin-top: 48px; padding: 24px 0; border-top: 1px solid var(--line); font-size: 12px; color: var(--muted); }
+#footer .container { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
+
+@media (max-width: 560px) {
+  .nav-top { flex-wrap: wrap; gap: 12px; }
+  .search { order: 3; max-width: none; flex-basis: 100%; }
+  .nav-cats { overflow-x: auto; }
+}
+
+/* Modal login dan daftar */
+.overlay { position: fixed; inset: 0; background: rgba(0,0,0,.6); display: flex; align-items: center; justify-content: center; z-index: 50; padding: 16px; }
+.modal { position: relative; background: #fff; border-radius: 10px; width: 100%; max-width: 360px; padding: 28px 26px; }
+.modal h2 { font-size: 18px; line-height: 1.25; text-align: center; margin: 0 0 8px; }
+.modal .sub { text-align: center; font-size: 12px; color: var(--muted); margin-bottom: 18px; }
+.modal .sub a { color: #1d4ed8; text-decoration: underline; cursor: pointer; }
+.modal .close { position: absolute; right: 12px; top: 8px; background: none; border: 0; font-size: 22px; line-height: 1; color: var(--muted); cursor: pointer; }
+.field { width: 100%; border: 0; border-bottom: 1px solid var(--line); padding: 10px 0; margin-bottom: 10px; background: none; outline: none; }
+.field:focus { border-bottom-color: var(--ink); }
+.btn-block { display: block; width: 100%; padding: 12px; border-radius: 6px; text-align: center; }
+.form-error { color: var(--red); font-size: 12px; min-height: 16px; margin-bottom: 8px; }
+
+/* Notifikasi kecil */
+.toast { position: fixed; left: 50%; bottom: 24px; transform: translateX(-50%); background: var(--ink); color: #fff; padding: 10px 18px; border-radius: 999px; font-size: 13px; z-index: 60; }
