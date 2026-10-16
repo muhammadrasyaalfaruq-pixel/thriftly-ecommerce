@@ -96,3 +96,52 @@ document.addEventListener('DOMContentLoaded', () => {
   if (document.getElementById('navbar')) renderNavbar();
   if (document.getElementById('footer')) renderFooter();
 });
+
+// 9. Notifikasi kecil di bawah layar
+function toast(msg) {
+  const t = document.createElement('div');
+  t.className = 'toast';
+  t.textContent = msg;
+  document.body.appendChild(t);
+  setTimeout(() => t.remove(), 2500);
+}
+
+// 10. Modal login / daftar. openAuth('login') atau openAuth('register')
+function openAuth(mode) {
+  const isLogin = mode === 'login';
+  const box = document.createElement('div');
+  box.className = 'overlay';
+  box.innerHTML = `
+    <div class="modal" role="dialog" aria-modal="true">
+      <button class="close" aria-label="Tutup">&times;</button>
+      <h2>${isLogin ? 'Masuk akun Thriftly<br>buat jual, beli &amp; nego' : 'Bikin akun di Thriftly,<br>langsung bisa jual &amp; beli'}</h2>
+      <div class="sub">${isLogin ? 'Belum punya akun?' : 'Sudah punya akun?'} <a id="ganti">${isLogin ? 'Daftar' : 'Masuk'}</a></div>
+      <form id="form-auth">
+        ${isLogin ? '' : '<input class="field" name="name" placeholder="Nama lengkap" required>'}
+        <input class="field" name="email" type="email" placeholder="Email" required>
+        <input class="field" name="password" type="password" placeholder="Password (min. 6 karakter)" required>
+        <div class="form-error" id="err"></div>
+        <button class="btn btn-block">${isLogin ? 'Masuk' : 'Daftar'}</button>
+      </form>
+    </div>`;
+  document.body.appendChild(box);
+
+  const tutup = () => box.remove();
+  box.querySelector('.close').onclick = tutup;
+  box.onclick = (e) => { if (e.target === box) tutup(); };           // klik area gelap = tutup
+  box.querySelector('#ganti').onclick = () => { tutup(); openAuth(isLogin ? 'register' : 'login'); };
+
+  box.querySelector('#form-auth').onsubmit = async (e) => {
+    e.preventDefault();
+    const body = Object.fromEntries(new FormData(e.target));          // ambil isi form
+    try {
+      const data = await api(isLogin ? '/auth/login' : '/auth/register', { method: 'POST', body });
+      Auth.save(data.token, data.user);                               // simpan status login
+      tutup();
+      renderNavbar();                                                 // navbar berubah jadi tampilan login
+      toast(data.message);
+    } catch (err) {
+      box.querySelector('#err').textContent = err.message;            // tampilkan pesan error dari backend
+    }
+  };
+}
