@@ -74,3 +74,55 @@ exports.list = async (req, res) => {
     res.status(500).json({ message: err.message });
   }
 };
+
+// Detail satu produk. Contoh: /api/products/1
+exports.detail = async (req, res) => {
+  try {
+    const id = Number(req.params.id);
+    if (!id) return res.status(400).json({ message: 'ID produk tidak valid' });
+
+    const [rows] = await db.query(
+      `SELECT p.id, p.name, p.description, p.price, p.size, p.condition_label,
+              p.stock, p.is_negotiable, p.status, p.created_at,
+              b.name AS brand, c.name AS category, c.slug AS category_slug,
+              s.id AS store_id, s.name AS store_name, s.slug AS store_slug, s.city AS store_city,
+              (SELECT COUNT(*) FROM wishlists w WHERE w.product_id = p.id) AS wishlist_count
+       FROM products p
+       JOIN categories c ON c.id = p.category_id
+       LEFT JOIN brands b ON b.id = p.brand_id
+       JOIN stores s ON s.id = p.store_id
+       WHERE p.id = ?`,
+      [id]
+    );
+    const p = rows[0];
+    // Produk yang disembunyikan penjual dianggap tidak ada
+    if (!p || p.status === 'hidden') {
+      return res.status(404).json({ message: 'Produk tidak ditemukan' });
+    }
+
+    const [images] = await db.query(
+      'SELECT id, image_url, is_primary FROM product_images WHERE product_id = ? ORDER BY is_primary DESC, id',
+      [id]
+    );
+    // Rating toko dihitung dari semua ulasan untuk toko itu
+    const [[rating]] = await db.query(
+      'SELECT COUNT(*) AS review_count, ROUND(AVG(rating), 1) AS rating_avg FROM reviews WHERE store_id = ?',
+      [p.store_id]
+    );
+
+    res.json({
+      id: p.id, name: p.name, description: p.description, price: p.price,
+      size: p.size, condition_label: p.condition_label, stock: p.stock,
+      is_negotiable: p.is_negotiable, status: p.status, created_at: p.created_at,
+      brand: p.brand, category: p.category, category_slug: p.category_slug,
+      wishlist_count: p.wishlist_count,
+      images,
+      store: {
+        id: p.store_id, name: p.store_name, slug: p.store_slug, city: p.store_city,
+        rating_avg: rating.rating_avg, review_count: rating.review_count,
+      },
+    });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
