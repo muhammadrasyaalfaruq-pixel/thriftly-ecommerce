@@ -29,3 +29,12 @@
   .collage { display: none; }
   .hero h1 { font-size: 28px; }
 }
+
+/* Halaman daftar produk */
+.page-head { display: flex; justify-content: space-between; align-items: baseline; margin: 24px 0 14px; }
+.page-head h1 { font-size: 28px; margin: 0; }
+.filter { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 22px; }
+.filter select, .filter input[type=number] { border: 1px solid #d8d8d2; border-radius: 999px; padding: 7px 12px; font-size: 12px; background: #fff; }
+.filter input[type=number] { width: 110px; }
+.more { text-align: center; margin: 28px 0 4px; }
+.btn-outline { background: #fff; color: var(--ink); }
