@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Semua Barang - Thriftly</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/catalog.css">
+</head>
+<body data-root="../">
+  <div id="navbar"></div>
+
+  <main class="container">
+    <div class="page-head">
+      <h1 id="judul">Semua barang</h1>
+      <span class="muted" id="jumlah"></span>
+    </div>
+
+    <form id="filter" class="filter">
+      <input type="hidden" name="q">
+      <select name="category"></select>
+      <select name="brand"></select>
+      <select name="condition">
+        <option value="">Semua kondisi</option>
+        <option value="like_new">Sangat baik</option>
+        <option value="good">Baik</option>
+        <option value="fair">Cukup</option>
+      </select>
+      <input type="number" name="min" placeholder="Harga min" min="0">
+      <input type="number" name="max" placeholder="Harga maks" min="0">
+      <select name="sort">
+        <option value="newest">Terbaru</option>
+        <option value="price_asc">Harga terendah</option>
+        <option value="price_desc">Harga tertinggi</option>
+      </select>
+      <button class="btn">Terapkan</button>
+      <a class="btn btn-outline" href="./products.html">Reset</a>
+    </form>
+
+    <div class="grid5" id="grid"></div>
+    <div class="more"><button class="btn btn-outline" id="lagi" hidden>Lihat lebih banyak</button></div>
+  </main>
+
+  <div id="footer"></div>
+
+  <script src="../js/main.js"></script>
+  <script src="../js/produk.js"></script>
+</body>
+</html>
