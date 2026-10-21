@@ -16,3 +16,15 @@
 .kosong { text-align: center; padding: 60px 0; color: var(--muted); }
 .kosong .btn { margin-top: 14px; }
 @media (max-width: 760px) { .cart-grid { grid-template-columns: 1fr; } }
+
+/* Halaman alamat */
+.addr-grid { display: grid; grid-template-columns: 1.3fr 1fr; gap: 28px; padding-bottom: 24px; }
+.addr-card { border: 1px solid var(--line); border-radius: 12px; padding: 18px; margin-bottom: 12px; }
+.addr-card.utama { border-color: var(--ink); }
+.addr-card .tag { display: inline-block; background: var(--ink); color: #fff; border-radius: 999px; padding: 2px 10px; font-size: 11px; margin-left: 8px; }
+.addr-card .aksi { display: flex; gap: 14px; margin-top: 10px; }
+.addr-card .aksi button { background: none; border: 0; padding: 0; font-size: 12px; font-weight: 600; cursor: pointer; }
+.addr-form { border: 1px solid var(--line); border-radius: 12px; padding: 20px; align-self: start; }
+.addr-form h3 { margin: 0 0 12px; }
+.addr-form .cek { display: flex; gap: 8px; align-items: center; font-size: 12px; margin: 6px 0 12px; }
+@media (max-width: 760px) { .addr-grid { grid-template-columns: 1fr; } }
