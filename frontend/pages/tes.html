@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tes - Thriftly</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body data-root="../">
+  <div id="navbar"></div>
+  <main class="container">
+    <h1>Tes kartu produk</h1>
+    <div class="grid5" id="grid"></div>
+  </main>
+  <div id="footer"></div>
+  <script src="../js/main.js"></script>
+  <script>
+    const contoh = [
+      { id: 1, name: 'Champion Track Jacket', brand: 'Champion', size: 'L', condition_label: 'good', price: 185000, wishlist_count: 27, is_negotiable: 1 },
+      { id: 2, name: 'Flannel Kotak', brand: 'Uniqlo', size: 'M', condition_label: 'like_new', price: 95000, wishlist_count: 10 },
+      { id: 3, name: 'Levis 501', brand: "Levi's", size: '32', condition_label: 'good', price: 220000, wishlist_count: 29, is_negotiable: 1 },
+      { id: 4, name: 'Jersey Retro', brand: 'Adidas', size: 'XL', condition_label: 'fair', price: 150000, wishlist_count: 15 },
+      { id: 5, name: 'Topi Nike', brand: 'Nike', size: 'All', condition_label: 'like_new', price: 70000, wishlist_count: 20 }
+    ];
+    document.getElementById('grid').innerHTML = contoh.map(productCard).join('');
+  </script>
+</body>
+</html>

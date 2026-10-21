@@ -67,8 +67,10 @@ async function muat() {
         t.classList.add('on');
       };
     });
-    document.getElementById('btn-beli').onclick = () => belumAda('Checkout');
-    document.getElementById('btn-cart').onclick = () => belumAda('Keranjang');
+    document.getElementById('btn-beli').onclick = async () => {
+      if (await tambahKeranjang(p.id)) location.href = ROOT + 'pages/cart.html';
+    };
+    document.getElementById('btn-cart').onclick = () => tambahKeranjang(p.id);
     document.getElementById('btn-wish').onclick = () => belumAda('Wishlist');
     const nego = document.getElementById('btn-nego');
     if (nego) nego.onclick = () => belumAda('Nego');
