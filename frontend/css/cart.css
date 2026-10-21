@@ -1,0 +1,18 @@
+/* THRIFTLY - CSS keranjang */
+.page-title { font-size: 28px; margin: 24px 0 14px; }
+.cart-grid { display: grid; grid-template-columns: 1.7fr 1fr; gap: 28px; padding-bottom: 24px; }
+.cart-store { border: 1px solid var(--line); border-radius: 12px; padding: 20px; margin-bottom: 16px; }
+.cart-store h3 { margin: 0 0 6px; font-size: 16px; }
+.cart-row { display: flex; gap: 14px; align-items: center; padding: 14px 0; border-top: 1px solid var(--line); }
+.cart-row img { width: 72px; height: 92px; object-fit: cover; border-radius: 6px; background: #eeeeea; }
+.cart-row .info { flex: 1; }
+.cart-row .nama { font-weight: 600; }
+.cart-row .hapus { background: none; border: 0; color: var(--muted); font-size: 12px; cursor: pointer; }
+.cart-row.habis { opacity: .5; }
+.cart-foot { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--line); padding-top: 14px; }
+.summary { align-self: start; border: 1px solid var(--line); border-radius: 12px; padding: 20px; }
+.summary .baris { display: flex; justify-content: space-between; margin-top: 12px; }
+.summary .total { font-size: 18px; font-weight: 700; border-top: 1px solid var(--line); padding-top: 14px; margin-top: 14px; }
+.kosong { text-align: center; padding: 60px 0; color: var(--muted); }
+.kosong .btn { margin-top: 14px; }
+@media (max-width: 760px) { .cart-grid { grid-template-columns: 1fr; } }
