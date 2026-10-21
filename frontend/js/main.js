@@ -164,3 +164,17 @@ function productCard(p) {
       <div class="price">${rupiah(p.price)}</div>
     </a>`;
 }
+
+// 12. Masukkan barang ke keranjang. Dipakai halaman detail produk.
+// Hasilnya true kalau berhasil (atau barang sudah ada), false kalau gagal
+async function tambahKeranjang(idProduk) {
+  if (!Auth.token) { openAuth('login'); return false; }   // belum login: tampilkan modal
+  try {
+    const data = await api('/cart', { method: 'POST', body: { product_id: idProduk } });
+    toast(data.message);
+    return true;
+  } catch (err) {
+    toast(err.message);                                    // contoh: "Barang ini sudah terjual"
+    return false;
+  }
+}
