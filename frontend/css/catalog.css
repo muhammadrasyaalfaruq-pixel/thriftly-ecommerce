@@ -1,0 +1,65 @@
+/* THRIFTLY - CSS beranda dan katalog */
+
+/* Hero */
+.hero { background: linear-gradient(120deg, #f4f3ee, #eef3ea); padding: 36px 0; margin-bottom: 28px; }
+.hero .container { display: flex; justify-content: space-between; align-items: center; gap: 24px; }
+.seg { display: inline-flex; background: #fff; border-radius: 999px; padding: 3px; margin-bottom: 18px; }
+.seg span { padding: 5px 16px; border-radius: 999px; font-size: 12px; }
+.seg .on { background: var(--soft); font-weight: 600; }
+.hero h1 { font-size: 36px; line-height: 1.1; margin: 0 0 10px; max-width: 440px; }
+.hero p { color: #55554f; margin: 0 0 18px; }
+.info-cards { display: flex; gap: 10px; margin-top: 20px; }
+.info-cards div { background: rgba(255,255,255,.7); border-radius: 8px; padding: 10px 14px; font-size: 11px; color: var(--muted); }
+.info-cards b { display: block; font-size: 12px; color: var(--ink); }
+
+/* Kolase tiga kartu miring di kanan hero */
+.collage { position: relative; width: 330px; height: 190px; flex-shrink: 0; }
+.collage .c { position: absolute; width: 120px; height: 160px; border-radius: 8px; box-shadow: 0 6px 18px rgba(0,0,0,.12); }
+.collage .c1 { left: 0; top: 24px; background: #d7c9b5; transform: rotate(-4deg); }
+.collage .c2 { left: 100px; top: 0; width: 130px; height: 180px; background: #b9cbb2; z-index: 2; }
+.collage .c3 { left: 210px; top: 20px; background: #c5cfdc; transform: rotate(4deg); }
+.collage .badge { position: absolute; left: 110px; bottom: 6px; z-index: 3; background: #fff; border-radius: 999px; padding: 3px 10px; font-size: 11px; font-weight: 600; }
+
+/* Judul bagian */
+.section-title { display: flex; justify-content: space-between; align-items: baseline; margin: 28px 0 14px; }
+.section-title h2 { font-size: 20px; margin: 0; }
+
+@media (max-width: 760px) {
+  .hero .container { flex-direction: column; align-items: flex-start; }
+  .collage { display: none; }
+  .hero h1 { font-size: 28px; }
+}
+
+/* Halaman daftar produk */
+.page-head { display: flex; justify-content: space-between; align-items: baseline; margin: 24px 0 14px; }
+.page-head h1 { font-size: 28px; margin: 0; }
+.filter { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 22px; }
+.filter select, .filter input[type=number] { border: 1px solid #d8d8d2; border-radius: 999px; padding: 7px 12px; font-size: 12px; background: #fff; }
+.filter input[type=number] { width: 110px; }
+.more { text-align: center; margin: 28px 0 4px; }
+.btn-outline { background: #fff; color: var(--ink); }
+
+[hidden] { display: none !important}
+
+/* Halaman detail produk */
+.chip { display: inline-block; padding: 7px 14px; border: 1px solid #d8d8d2; border-radius: 999px; font-size: 12px; }
+.detail { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; padding: 28px 0; }
+.gallery .main { aspect-ratio: 3 / 4; background: #eeeeea; border-radius: 8px; overflow: hidden; }
+.gallery .main img { width: 100%; height: 100%; object-fit: cover; }
+.thumbs { display: flex; gap: 10px; margin-top: 10px; }
+.thumbs img { width: 72px; height: 92px; object-fit: cover; border-radius: 6px; cursor: pointer; border: 2px solid transparent; }
+.thumbs img.on { border-color: var(--ink); }
+.detail h1 { font-size: 32px; line-height: 1.15; margin: 6px 0; }
+.detail .price { font-size: 28px; font-weight: 700; margin: 6px 0 14px; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
+.desc { color: #444; line-height: 1.6; white-space: pre-line; }
+.actions { display: grid; gap: 10px; margin: 20px 0; }
+.actions .baris { display: flex; gap: 10px; }
+.actions .baris .btn { flex: 1; text-align: center; }
+.store-card { display: flex; gap: 14px; align-items: center; border: 1px solid var(--line); border-radius: 12px; padding: 16px; }
+.store-card .info { flex: 1; }
+.avatar { width: 52px; height: 52px; border-radius: 50%; background: #e8dccb; display: flex; align-items: center; justify-content: center; font-weight: 700; }
+.note { background: var(--soft); border-radius: 12px; padding: 14px 16px; margin-top: 12px; font-size: 12px; color: #55554f; }
+.sold { display: inline-block; background: var(--ink); color: #fff; border-radius: 999px; padding: 4px 12px; font-size: 12px; font-weight: 600; margin-bottom: 8px; }
+
+@media (max-width: 760px) { .detail { grid-template-columns: 1fr; gap: 24px; } }
