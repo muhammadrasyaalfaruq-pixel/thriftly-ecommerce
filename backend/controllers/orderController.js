@@ -92,3 +92,93 @@ exports.create = async (req, res) => {
     conn.release();                          // kembalikan koneksi ke pool
   }
 };
+
+// Daftar pesanan milik user yang login (terbaru di atas)
+exports.list = async (req, res) => {
+  try {
+    const [rows] = await db.query(
+      `SELECT o.id, o.order_code, o.status, o.total_price, o.created_at,
+              s.name AS store_name,
+              (SELECT COUNT(*) FROM order_items WHERE order_id = o.id) AS item_count,
+              (SELECT pi.image_url FROM order_items oi
+                 JOIN product_images pi ON pi.product_id = oi.product_id
+                 WHERE oi.order_id = o.id ORDER BY pi.is_primary DESC, pi.id LIMIT 1) AS image
+       FROM orders o JOIN stores s ON s.id = o.store_id
+       WHERE o.buyer_id = ? ORDER BY o.id DESC`,
+      [req.user.id]
+    );
+    res.json(rows);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
+
+// Detail satu pesanan (hanya boleh dilihat pembelinya)
+exports.detail = async (req, res) => {
+  try {
+    const id = Number(req.params.id);
+    const [orders] = await db.query(
+      `SELECT o.id, o.order_code, o.status, o.courier, o.tracking_number,
+              o.shipping_cost, o.total_price, o.created_at,
+              s.id AS store_id, s.name AS store_name, s.slug AS store_slug,
+              a.recipient_name, a.phone, a.street, a.city, a.province, a.postal_code
+       FROM orders o
+       JOIN stores s ON s.id = o.store_id
+       JOIN addresses a ON a.id = o.address_id
+       WHERE o.id = ? AND o.buyer_id = ?`,
+      [id, req.user.id]
+    );
+    const o = orders[0];
+    if (!o) return res.status(404).json({ message: 'Pesanan tidak ditemukan' });
+
+    const [items] = await db.query(
+      `SELECT oi.id AS order_item_id, p.id AS product_id, p.name, p.size, p.condition_label,
+              b.name AS brand, oi.price_at_purchase AS price,
+              (SELECT image_url FROM product_images WHERE product_id = p.id
+                 ORDER BY is_primary DESC, id LIMIT 1) AS image
+       FROM order_items oi
+       JOIN products p ON p.id = oi.product_id
+       LEFT JOIN brands b ON b.id = p.brand_id
+       WHERE oi.order_id = ?`,
+      [id]
+    );
+    const [pay] = await db.query(
+      'SELECT method, amount, status, proof_image, paid_at FROM payments WHERE order_id = ?', [id]
+    );
+    res.json({ ...o, subtotal: o.total_price - o.shipping_cost, items, payment: pay[0] || null });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
+
+// Batalkan pesanan yang belum dibayar. Barangnya jadi tersedia lagi
+exports.cancel = async (req, res) => {
+  const conn = await db.getConnection();
+  try {
+    const id = Number(req.params.id);
+    await conn.beginTransaction();
+    const [rows] = await conn.query(
+      'SELECT id, status FROM orders WHERE id = ? AND buyer_id = ? FOR UPDATE', [id, req.user.id]
+    );
+    if (!rows[0]) {
+      await conn.rollback();
+      return res.status(404).json({ message: 'Pesanan tidak ditemukan' });
+    }
+    if (rows[0].status !== 'pending_payment') {
+      await conn.rollback();
+      return res.status(400).json({ message: 'Hanya pesanan yang belum dibayar yang bisa dibatalkan' });
+    }
+    await conn.query("UPDATE orders SET status = 'cancelled' WHERE id = ?", [id]);
+    await conn.query(
+      "UPDATE products SET stock = 1, status = 'active' WHERE id IN (SELECT product_id FROM order_items WHERE order_id = ?)",
+      [id]
+    );
+    await conn.commit();
+    res.json({ message: 'Pesanan dibatalkan' });
+  } catch (err) {
+    try { await conn.rollback(); } catch (e) { /* belum ada transaksi */ }
+    res.status(500).json({ message: err.message });
+  } finally {
+    conn.release();
+  }
+};
