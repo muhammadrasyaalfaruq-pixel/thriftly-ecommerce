@@ -1,0 +1,28 @@
+/* THRIFTLY - CSS panel : sidebar untuk dashboard penjual dan admin */
+.btn-outline { background: #fff; color: var(--ink); }
+.kosong { text-align: center; padding: 60px 0; color: var(--muted); }
+.kosong .btn { margin-top: 14px; }
+
+.panel { display: grid; grid-template-columns: 240px 1fr; min-height: 100vh; }
+.panel-side { background: var(--ink); color: #fff; padding: 28px 20px; }
+.panel-side .logo { color: #fff; }
+.panel-side .sub { color: #c9c9c4; font-size: 12px; margin: 4px 0 26px; }
+.panel-side a.item { display: block; padding: 10px 12px; border-radius: 8px; font-size: 13px; color: #e6e6e2; margin-bottom: 4px; }
+.panel-side a.item:hover, .panel-side a.item.on { background: #2a2a2a; color: #fff; }
+.panel-side .keluar { display: block; margin-top: 28px; font-size: 12px; color: #c9c9c4; }
+.panel-main { padding: 32px 40px; }
+
+.panel-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 22px; }
+.panel-head h1 { font-size: 28px; margin: 0; }
+.stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; margin-bottom: 24px; }
+.stat { border: 1px solid var(--line); border-radius: 12px; padding: 18px; }
+.stat .m { color: var(--muted); font-size: 12px; }
+.stat b { display: block; font-family: var(--display); font-size: 30px; margin-top: 4px; }
+.panel-card { border: 1px solid var(--line); border-radius: 12px; padding: 20px; margin-bottom: 16px; }
+.panel-card h3 { margin: 0 0 12px; font-size: 16px; }
+.tbl { width: 100%; border-collapse: collapse; font-size: 13px; }
+.tbl th { text-align: left; color: var(--muted); font-weight: 500; padding: 8px 0; }
+.tbl td { padding: 12px 0; border-top: 1px solid var(--line); }
+.catatan { background: var(--soft); border-radius: 10px; padding: 12px 14px; font-size: 12px; color: #55554f; margin-top: 12px; }
+
+@media (max-width: 760px) { .panel { grid-template-columns: 1fr; } .panel-main { padding: 20px 16px; } }
