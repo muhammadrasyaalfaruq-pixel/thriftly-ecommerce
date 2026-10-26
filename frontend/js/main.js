@@ -59,7 +59,7 @@ function renderNavbar() {
        <button class="btn" id="btn-daftar">Daftar</button>`;
 
   const kategori = ['Wanita', 'Pria', 'Branded', 'Anak', 'Hiburan']
-    .map((c) => `<a href="${ROOT}pages/products.html?category=${c.toLowerCase()}">${c}</a>`).join('');
+    .map((c) => `<a href="${ROOT}pages/products.html?${c === 'Branded' ? 'branded=1' : 'category=' + c.toLowerCase()}">${c}</a>`).join('');
 
   document.getElementById('navbar').innerHTML = `
     <div class="container">
@@ -214,34 +214,4 @@ function renderPanel(jenis, aktif) {
     return false;
   }
   return true;
-}
-
-// 14. Wishlist untuk halaman detail produk
-// ubahWishlist: tambah atau hapus. Hasil: true = sekarang ada di wishlist, false = sekarang tidak, null = gagal
-async function ubahWishlist(idProduk, sudahAda) {
-  if (!Auth.token) { openAuth('login'); return null; }      // belum login: tampilkan modal
-  try {
-    if (sudahAda) {
-      const d = await api('/wishlist/' + idProduk, { method: 'DELETE' });
-      toast(d.message);
-      return false;
-    }
-    const d = await api('/wishlist', { method: 'POST', body: { product_id: idProduk } });
-    toast(d.message);
-    return true;
-  } catch (err) {
-    toast(err.message);
-    return null;
-  }
-}
-
-// cekWishlist: apakah barang ini sudah ada di wishlist user yang login?
-async function cekWishlist(idProduk) {
-  if (!Auth.token) return false;
-  try {
-    const d = await api('/wishlist');
-    return d.items.some((i) => i.id === idProduk);
-  } catch (err) {
-    return false;
-  }
 }
