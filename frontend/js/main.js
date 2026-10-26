@@ -46,6 +46,7 @@ const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&l
 
 // 6. Navbar (mirip Preloved). Tampilan beda untuk tamu dan user yang sudah login
 function renderNavbar() {
+    if (!document.getElementById('navbar')) return;     // halaman panel tidak punya navbar
   const u = Auth.user;
   const kanan = u
     ? `<a class="link" href="${ROOT}seller/dashboard.html">Jual</a>
@@ -177,4 +178,40 @@ async function tambahKeranjang(idProduk) {
     toast(err.message);                                    // contoh: "Barang ini sudah terjual"
     return false;
   }
+}
+
+// 13. Layout panel (sidebar) untuk halaman penjual dan admin
+// Pakai di halaman panel: if (renderPanel('seller', 'dashboard')) { ...isi halaman... }
+// jenis: 'seller' atau 'admin'. Hasilnya false kalau pengunjung tidak boleh masuk
+const MENU_PANEL = {
+  seller: { judul: 'Dashboard Penjual', menu: [
+    ['dashboard', 'Ringkasan', 'seller/dashboard.html'],
+    ['produk', 'Tambah produk', 'seller/product-form.html'],
+  ] },
+  admin: { judul: 'Panel Admin', menu: [
+    ['dashboard', 'Ringkasan', 'admin/dashboard.html'],
+  ] },
+};
+
+function renderPanel(jenis, aktif) {
+  const u = Auth.user;
+  const boleh = u && (jenis === 'seller' || u.role === 'admin');   // admin: wajib role admin
+  const p = MENU_PANEL[jenis];
+
+  document.getElementById('panel-side').innerHTML = `
+    <a class="logo" href="${ROOT}index.html"><i>&hearts;</i> thriftly</a>
+    <div class="sub">${p.judul}</div>
+    ${p.menu.map(([kunci, nama, url]) =>
+      `<a class="item ${kunci === aktif ? 'on' : ''}" href="${ROOT}${url}">${nama}</a>`).join('')}
+    <a class="keluar" href="${ROOT}index.html">&larr; Kembali ke toko</a>`;
+
+  if (!boleh) {
+    document.getElementById('panel-isi').innerHTML = `<div class="kosong">
+      <p>${u ? 'Halaman ini khusus admin.' : 'Masuk dulu untuk membuka halaman ini. Setelah login, muat ulang halaman (F5).'}</p>
+      ${u ? '' : '<button class="btn" id="btn-masuk">Log in</button>'}</div>`;
+    const tombol = document.getElementById('btn-masuk');
+    if (tombol) tombol.onclick = () => openAuth('login');
+    return false;
+  }
+  return true;
 }
