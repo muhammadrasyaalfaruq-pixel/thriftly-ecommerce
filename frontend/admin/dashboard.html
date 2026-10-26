@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Panel Admin - Thriftly</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/panel.css">
+</head>
+<body data-root="../">
+  <div class="panel">
+    <aside id="panel-side" class="panel-side"></aside>
+    <section id="panel-isi" class="panel-main">
+      <div class="panel-head"><h1>Ringkasan</h1></div>
+
+      <div class="stat-grid">
+        <div class="stat"><span class="m">User</span><b>128</b></div>
+        <div class="stat"><span class="m">Produk aktif</span><b id="stat-produk">-</b></div>
+        <div class="stat"><span class="m">Pesanan bulan ini</span><b>57</b></div>
+        <div class="stat"><span class="m">Menunggu konfirmasi</span><b>3</b></div>
+      </div>
+
+      <div class="panel-card">
+        <h3>Pembayaran menunggu konfirmasi (rekber)</h3>
+        <table class="tbl">
+          <tr><th>Kode</th><th>Pembeli</th><th>Toko</th><th>Jumlah</th><th>Aksi</th></tr>
+          <tr><td><b>TH-1042</b></td><td>Fandi</td><td>Rasya Vintage</td><td>Rp 298.000</td>
+              <td><button class="btn" style="padding:5px 12px" data-menyusul>Konfirmasi</button> <button class="btn btn-outline" style="padding:5px 12px" data-menyusul>Tolak</button></td></tr>
+          <tr><td><b>TH-1041</b></td><td>Dandi</td><td>Rasya Vintage</td><td>Rp 150.000</td>
+              <td><button class="btn" style="padding:5px 12px" data-menyusul>Konfirmasi</button> <button class="btn btn-outline" style="padding:5px 12px" data-menyusul>Tolak</button></td></tr>
+          <tr><td><b>TH-1039</b></td><td>Apip</td><td>Rasya Vintage</td><td>Rp 220.000</td>
+              <td><button class="btn" style="padding:5px 12px" data-menyusul>Konfirmasi</button> <button class="btn btn-outline" style="padding:5px 12px" data-menyusul>Tolak</button></td></tr>
+        </table>
+        <div class="catatan">Data di atas contoh, kecuali "Produk aktif". Konfirmasi pembayaran dikerjakan setelah UTS.</div>
+      </div>
+    </section>
+  </div>
+
+  <script src="../js/main.js"></script>
+  <script src="../js/admin.js"></script>
+</body>
+</html>

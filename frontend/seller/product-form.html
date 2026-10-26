@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tambah Produk - Thriftly</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/panel.css">
+  <link rel="stylesheet" href="../css/seller.css">
+</head>
+<body data-root="../" data-halaman="produk">
+  <div class="panel">
+    <aside id="panel-side" class="panel-side"></aside>
+    <section id="panel-isi" class="panel-main">
+      <div class="panel-head">
+        <h1>Tambah produk</h1>
+        <a class="btn btn-outline" href="./dashboard.html">&larr; Kembali</a>
+      </div>
+
+      <form class="panel-card" id="form-produk">
+        <div class="form-grid">
+          <div class="penuh"><label class="lbl">Nama produk</label><input class="field" name="name" placeholder="Contoh: Champion Track Jacket 90s" required></div>
+          <div><label class="lbl">Kategori</label><select class="sel" id="kategori" name="category_id" required></select></div>
+          <div><label class="lbl">Brand</label><select class="sel" id="brand" name="brand_id"></select></div>
+          <div><label class="lbl">Ukuran</label><input class="field" name="size" placeholder="S, M, L, 32, All size"></div>
+          <div>
+            <label class="lbl">Kondisi</label>
+            <select class="sel" name="condition_label">
+              <option value="like_new">Sangat baik</option>
+              <option value="good">Baik</option>
+              <option value="fair">Cukup</option>
+            </select>
+          </div>
+          <div><label class="lbl">Harga (Rp)</label><input class="field" name="price" type="number" min="0" placeholder="185000" required></div>
+          <div class="cek"><input type="checkbox" name="is_negotiable" id="nego"><label for="nego">Bisa nego</label></div>
+          <div class="penuh"><label class="lbl">Deskripsi</label><textarea class="area" name="description" placeholder="Kondisi, ukuran detail, dan kekurangan (kalau ada)"></textarea></div>
+          <div class="penuh"><div class="foto-box">Unggah foto produk (menyusul setelah UTS)</div></div>
+        </div>
+        <button class="btn">Simpan produk</button>
+        <div class="catatan">Tampilan form saja. Tombol simpan belum menyimpan data.</div>
+      </form>
+    </section>
+  </div>
+
+  <script src="../js/main.js"></script>
+  <script src="../js/seller.js"></script>
+</body>
+</html>
