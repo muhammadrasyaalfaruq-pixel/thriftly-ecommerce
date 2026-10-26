@@ -23,6 +23,7 @@ async function isiFilter() {
   const dipilih = kat.find((k) => k.slug === params.get('category'));
   document.getElementById('judul').textContent = params.get('q')
     ? `Hasil untuk "${params.get('q')}"` : dipilih ? dipilih.name : 'Semua barang';
+      if (params.get('branded')) document.getElementById('judul').textContent = 'Branded';
 }
 
 // 2. Ambil produk dari backend. Halaman pertama mengganti isi, halaman berikutnya menambah
@@ -49,6 +50,7 @@ form.onsubmit = (e) => {
   e.preventDefault();
   const baru = new URLSearchParams();
   for (const [nama, nilai] of new FormData(form)) if (nilai) baru.set(nama, nilai);
+  if (params.get('branded')) baru.set('branded', '1');     // jangan hilang saat tombol Terapkan ditekan
   location.search = baru.toString();
 };
 
