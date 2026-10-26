@@ -71,7 +71,15 @@ async function muat() {
       if (await tambahKeranjang(p.id)) location.href = ROOT + 'pages/cart.html';
     };
     document.getElementById('btn-cart').onclick = () => tambahKeranjang(p.id);
-    document.getElementById('btn-wish').onclick = () => belumAda('Wishlist');
+            // Tombol hati: tampil terisi kalau barang sudah ada di wishlist
+    const hati = document.getElementById('btn-wish');
+    let adaDiWishlist = await cekWishlist(p.id);
+    const gambarHati = () => { hati.innerHTML = adaDiWishlist ? '&#9829;' : '&#9825;'; };
+    gambarHati();
+    hati.onclick = async () => {
+      const hasil = await ubahWishlist(p.id, adaDiWishlist);
+      if (hasil !== null) { adaDiWishlist = hasil; gambarHati(); }
+    };
     const nego = document.getElementById('btn-nego');
     if (nego) nego.onclick = () => belumAda('Nego');
   } catch (err) {
