@@ -41,6 +41,7 @@ exports.list = async (req, res) => {
       params.push(category, category);
     }
     if (brand) { where.push('b.slug = ?'); params.push(brand); }
+    if (req.query.branded) where.push('p.brand_id IS NOT NULL');   // menu Branded: hanya barang yang punya brand
     if (size) { where.push('p.size = ?'); params.push(size); }
     if (condition) { where.push('p.condition_label = ?'); params.push(condition); }
     if (min) { where.push('p.price >= ?'); params.push(Number(min)); }
