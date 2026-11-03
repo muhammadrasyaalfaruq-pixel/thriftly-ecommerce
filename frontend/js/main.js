@@ -51,6 +51,7 @@ function renderNavbar() {
   const kanan = u
     ? `<a class="link" href="${ROOT}seller/dashboard.html">Jual</a>
        <a class="link" href="${ROOT}pages/wishlist.html">Wishlist</a>
+       <a class="link" href="${ROOT}pages/addresses.html">Alamat</a>
        <a class="link" href="${ROOT}pages/cart.html">Keranjang</a>
        ${u.role === 'admin' ? `<a class="link" href="${ROOT}admin/dashboard.html">Admin</a>` : ''}
        <a class="link" href="${ROOT}pages/orders.html">${esc(u.name.split(' ')[0])}</a>
@@ -214,4 +215,32 @@ function renderPanel(jenis, aktif) {
     return false;
   }
   return true;
+}
+
+// 14. Wishlist untuk halaman detail produk
+async function ubahWishlist(idProduk, sudahAda) {
+  if (!Auth.token) { openAuth('login'); return null; }
+  try {
+    if (sudahAda) {
+      const d = await api('/wishlist/' + idProduk, { method: 'DELETE' });
+      toast(d.message);
+      return false;
+    }
+    const d = await api('/wishlist', { method: 'POST', body: { product_id: idProduk } });
+    toast(d.message);
+    return true;
+  } catch (err) {
+    toast(err.message);
+    return null;
+  }
+}
+
+async function cekWishlist(idProduk) {
+  if (!Auth.token) return false;
+  try {
+    const d = await api('/wishlist');
+    return d.items.some((i) => i.id === idProduk);
+  } catch (err) {
+    return false;
+  }
 }
