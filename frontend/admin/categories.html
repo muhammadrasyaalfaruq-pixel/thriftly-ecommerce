@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kelola Kategori - Thriftly Admin</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/panel.css">
+  <style>
+    .form-group { margin-bottom: 1rem; }
+    .form-group label { display: block; font-weight: 500; margin-bottom: 0.3rem; }
+    .form-group input, .form-group select { width: 100%; padding: 0.6rem; border: 1px solid #ddd; border-radius: 4px; font-size: 0.95rem; }
+    .form-group input:focus, .form-group select:focus { outline: none; border-color: #000; }
+    .form-btn { display: flex; gap: 0.5rem; }
+    .form-btn button { padding: 0.6rem 1rem; }
+    .btn-batal { background: #f0f0f0; color: #333; }
+    .btn-batal:hover { background: #e0e0e0; }
+
+    .tbl { width: 100%; border-collapse: collapse; margin-top: 1rem; }
+    .tbl th { background: #f5f5f5; padding: 0.8rem; text-align: left; font-weight: 600; border-bottom: 2px solid #ddd; }
+    .tbl td { padding: 0.8rem; border-bottom: 1px solid #ddd; }
+    .tbl tr:hover { background: #fafafa; }
+
+    .aksi-btn { display: flex; gap: 0.3rem; }
+    .aksi-btn button { padding: 0.4rem 0.8rem; font-size: 0.85rem; }
+    .btn-edit { background: #4CAF50; color: white; }
+    .btn-edit:hover { background: #45a049; }
+    .btn-hapus { background: #f44336; color: white; }
+    .btn-hapus:hover { background: #da190b; }
+
+    .form-card { background: white; padding: 1.5rem; border-radius: 8px; margin-bottom: 1.5rem; border: 1px solid #ddd; }
+    .form-card h3 { margin-top: 0; margin-bottom: 1rem; }
+
+    .induk-info { font-size: 0.85rem; color: #666; margin-top: 0.2rem; }
+  </style>
+</head>
+<body data-root="../">
+  <div class="panel">
+    <aside id="panel-side" class="panel-side"></aside>
+    <section id="panel-isi" class="panel-main">
+      <div class="panel-head"><h1>Kelola Kategori</h1></div>
+
+      <!-- Form Tambah/Edit -->
+      <div class="form-card" id="form-card">
+        <h3 id="form-judul">Tambah Kategori Baru</h3>
+        <form id="form-kategori">
+          <div class="form-group">
+            <label for="input-nama">Nama Kategori*</label>
+            <input id="input-nama" type="text" placeholder="Contoh: Jaket Pria, Nike" required>
+          </div>
+          <div class="form-group">
+            <label for="input-parent">Kategori Induk (opsional)</label>
+            <select id="input-parent">
+              <option value="">-- Tidak ada (kategori utama) --</option>
+              <div id="parent-options"></div>
+            </select>
+            <div class="induk-info" id="induk-info"></div>
+          </div>
+          <div class="form-btn">
+            <button class="btn" type="submit">Simpan</button>
+            <button class="btn btn-batal" id="btn-batal" type="button" style="display:none;">Batal</button>
+          </div>
+          <div class="form-error" id="form-error"></div>
+        </form>
+      </div>
+
+      <!-- Tabel Kategori -->
+      <div class="panel-card">
+        <h3>Daftar Kategori</h3>
+        <table class="tbl" id="tbl-kategori">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Nama</th>
+              <th>Slug</th>
+              <th>Kategori Induk</th>
+              <th>Aksi</th>
+            </tr>
+          </thead>
+          <tbody id="tbl-body">
+            <tr><td colspan="5" style="text-align:center; color:#999;">Memuat...</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </div>
+
+  <script src="../js/main.js"></script>
+  <script src="../js/admin-categories.js"></script>
+</body>
+</html>

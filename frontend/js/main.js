@@ -191,6 +191,8 @@ const MENU_PANEL = {
   ] },
   admin: { judul: 'Panel Admin', menu: [
     ['dashboard', 'Ringkasan', 'admin/dashboard.html'],
+    ['kategori', 'Kategori', 'admin/categories.html'],
+    ['merek', 'Merek', 'admin/brands.html'],
   ] },
 };
 
