@@ -17,13 +17,13 @@ Kelompok 5, Semester 3 – Tugas Akhir E-Commerce.
 
 ## Anggota Kelompok
 
-| Nama | Modul | Branch |
-|---|---|---|
-| Rasya (Ketua) | Fondasi, Login/Daftar, Admin master | feature/database-rasya |
-| Adit | Katalog dan Nego | feature/adit |
-| Apip | Penjual dan Produk | feature/apip |
-| Dandi | Keranjang dan Alamat | feature/dandi |
-| Fandi | Pesanan, Checkout, Pembayaran | feature/Fandi |
+| No | Nama Lengkap | NIM | Modul | Branch |
+|----|---|---|---|---|
+| 1 | Muhammad Rasya Alfaruq (Ketua) | 2522105073 | Fondasi, Login/Daftar, Admin master | feature/database-rasya |
+| 2 | Aditya Ramadhan | 2522105066 | Katalog dan Nego | feature/adit |
+| 3 | Muhammad Rafif Hamdani | 2522105025 | Penjual dan Produk | feature/apip |
+| 4 | Dandi Naufal Asadel | 2522105041 | Keranjang dan Alamat | feature/dandi |
+| 5 | Alfandi Maulana | 2522105044 | Pesanan, Checkout, Pembayaran | feature/Fandi |
 
 ## Cara Menjalankan
 
