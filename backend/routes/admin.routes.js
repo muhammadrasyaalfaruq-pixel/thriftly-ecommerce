@@ -7,7 +7,7 @@ const isAdmin = require('../middleware/isAdmin');
 router.use('/admin', auth, isAdmin);
 
 // 1. READ: Ambil semua kategori beserta nama induknya (parent)
-router.get('/categories', async (req, res) => {
+router.get('/admin/categories', async (req, res) => {
   try {
     const query = `
       SELECT c.id, c.parent_id, c.name, c.slug, p.name AS parent_name
@@ -23,7 +23,7 @@ router.get('/categories', async (req, res) => {
 });
 
 // 2. CREATE: Tambah kategori baru
-router.post('/categories', async (req, res) => {
+router.post('/admin/categories', async (req, res) => {
   try {
     const { name, parent_id } = req.body;
     if (!name || !name.trim()) {
@@ -54,7 +54,7 @@ router.post('/categories', async (req, res) => {
 });
 
 // 3. UPDATE: Edit nama atau induk kategori
-router.put('/categories/:id', async (req, res) => {
+router.put('/admin/categories/:id', async (req, res) => {
   try {
     const { id } = req.params;
     const { name, parent_id } = req.body;
@@ -92,7 +92,7 @@ router.put('/categories/:id', async (req, res) => {
 });
 
 // 4. DELETE: Hapus kategori
-router.delete('/categories/:id', async (req, res) => {
+router.delete('/admin/categories/:id', async (req, res) => {
   try {
     const { id } = req.params;
 
@@ -122,7 +122,7 @@ router.delete('/categories/:id', async (req, res) => {
 // === CRUD BRANDS (Tugas Dandi) ===
 
 // 1. READ: Ambil semua brand
-router.get('/brands', async (req, res) => {
+router.get('/admin/brands', async (req, res) => {
   try {
     const [rows] = await db.query('SELECT id, name, slug FROM brands ORDER BY id DESC');
     res.json(rows);
@@ -132,7 +132,7 @@ router.get('/brands', async (req, res) => {
 });
 
 // 2. CREATE: Tambah brand baru
-router.post('/brands', async (req, res) => {
+router.post('/admin/brands', async (req, res) => {
   try {
     const { name } = req.body;
     if (!name || !name.trim()) return res.status(400).json({ message: 'Nama brand wajib diisi' });
@@ -147,7 +147,7 @@ router.post('/brands', async (req, res) => {
 });
 
 // 3. UPDATE: Edit brand
-router.put('/brands/:id', async (req, res) => {
+router.put('/admin/brands/:id', async (req, res) => {
   try {
     const { id } = req.params;
     const { name } = req.body;
@@ -164,7 +164,7 @@ router.put('/brands/:id', async (req, res) => {
 });
 
 // 4. DELETE: Hapus brand
-router.delete('/brands/:id', async (req, res) => {
+router.delete('/admin/brands/:id', async (req, res) => {
   try {
     const { id } = req.params;
     // Cek apakah ada produk yang memakai brand ini
